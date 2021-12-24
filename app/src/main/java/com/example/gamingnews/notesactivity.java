@@ -57,7 +57,7 @@ public class notesactivity extends AppCompatActivity {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         firebaseFirestore = FirebaseFirestore.getInstance();
 
-        getSupportActionBar().setTitle("All Notes");
+        // getSupportActionBar().setTitle("All Notes");
 
         mcreatenotesfab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,8 +101,6 @@ public class notesactivity extends AppCompatActivity {
                         intent.putExtra("noteId", docId);
 
                         v.getContext().startActivity(intent);
-
-
 
 
                     }
@@ -206,6 +204,8 @@ public class notesactivity extends AppCompatActivity {
                 firebaseAuth.signOut();
                 finish();
                 startActivity(new Intent(notesactivity.this, MainActivity.class));
+                break;
+
         }
         return super.onOptionsItemSelected(item);
     }

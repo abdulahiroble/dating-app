@@ -10,7 +10,8 @@
             android:id="@+id/topNavViewBar"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_gravity="bottom">
+            android:layout_gravity="bottom"
+            app:menu="@menu/top_navigation_toolbar">
 
         </com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx>
 
