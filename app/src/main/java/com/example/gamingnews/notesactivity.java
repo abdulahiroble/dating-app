@@ -81,19 +81,19 @@ public class notesactivity extends AppCompatActivity {
         // setupTopNavigationView();
 
         rowItems = new ArrayList<Cards>();
-        Cards cards = new Cards("1", "Swati Tripathy", 21, "https://im.idiva.com/author/2018/Jul/shivani_chhabra-_author_s_profile.jpg", "Simple and beautiful Girl", "Acting", 200);
+        Cards cards = new Cards("1", "Sarah", 21, "https://images.unsplash.com/photo-1612000529646-f424a2aa1bff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80", "Simple and beautiful Girl", "Acting", 200);
         rowItems.add(cards);
-        cards = new Cards("2", "Ananaya Pandy", 20, "https://i0.wp.com/profilepicturesdp.com/wp-content/uploads/2018/06/beautiful-indian-girl-image-for-profile-picture-8.jpg", "cool Minded Girl", "Dancing", 800);
+        cards = new Cards("2", "Laura", 20, "https://images.unsplash.com/photo-1605170444329-61aa23227b07?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80", "cool Minded Girl", "Dancing", 800);
         rowItems.add(cards);
-        cards = new Cards("3", "Anjali Kasyap", 22, "https://pbs.twimg.com/profile_images/967542394898952192/_M_eHegh_400x400.jpg", "Simple and beautiful Girl", "Singing", 400);
+        cards = new Cards("3", "Michelle", 22, "https://images.unsplash.com/photo-1622403974791-6535771380d5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80", "Simple and beautiful Girl", "Singing", 400);
         rowItems.add(cards);
-        cards = new Cards("4", "Preety Deshmukh", 19, "http://profilepicturesdp.com/wp-content/uploads/2018/07/fb-real-girls-dp-3.jpg", "dashing girl", "swiming", 1308);
+        cards = new Cards("4", "Ashley", 19, "https://images.unsplash.com/photo-1631914289393-d529f81138a2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80", "dashing girl", "swiming", 1308);
         rowItems.add(cards);
-        cards = new Cards("5", "Srutimayee Sen", 20, "https://dp.profilepics.in/profile_pictures/selfie-girls-profile-pics-dp/selfie-pics-dp-for-whatsapp-facebook-profile-25.jpg", "chulbuli nautankibaj ", "Drawing", 1200);
+        cards = new Cards("5", "Courtney", 20, "https://images.unsplash.com/photo-1546961342-ea5f71b193f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80", "chulbuli nautankibaj ", "Drawing", 1200);
         rowItems.add(cards);
-        cards = new Cards("6", "Dikshya Agarawal", 21, "https://pbs.twimg.com/profile_images/485824669732200448/Wy__CJwU.jpeg", "Simple and beautiful Girl", "Sleeping", 700);
+        cards = new Cards("6", "Olivia", 21, "https://images.unsplash.com/photo-1619416284537-af352d51214d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80", "Simple and beautiful Girl", "Sleeping", 700);
         rowItems.add(cards);
-        cards = new Cards("7", "Sudeshna Roy", 19, "https://talenthouse-res.cloudinary.com/image/upload/c_fill,f_auto,h_640,w_640/v1411380245/user-415406/submissions/hhb27pgtlp9akxjqlr5w.jpg", "Papa's Pari", "Art", 5000);
+        cards = new Cards("7", "Hannah", 19, "https://images.unsplash.com/photo-1613063074391-12ed77ac5a13?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=436&q=80", "Papa's Pari", "Art", 5000);
         rowItems.add(cards);
 
         arrayAdapter = new PhotoAdapter(this, R.layout.item, rowItems);
@@ -195,8 +195,7 @@ public class notesactivity extends AppCompatActivity {
 
     private void checkRowItem() {
         if (rowItems.isEmpty()) {
-            cardFrame.setVisibility(View.GONE);
-            // cardFrame.setVisibility(View.GONE);
+            cardFrame.setVisibility(View.VISIBLE);
         }
     }
 
