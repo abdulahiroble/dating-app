@@ -49,11 +49,7 @@ public class notesactivity extends AppCompatActivity {
 
     List<Cards> rowItems;
 
-    FrameLayout cardFrame, moreFrame;
-
-    private static final int ACTIVITY_NUM = 1;
-
-    private Context mContext = notesactivity.this;
+    FrameLayout cardFrame;
 
     RecyclerView mrecyclerview;
     StaggeredGridLayoutManager staggeredGridLayoutManager;
@@ -275,18 +271,6 @@ public class notesactivity extends AppCompatActivity {
     }
 
 
-    /*
-    private void setupTopNavigationView() {
-        BottomNavigationViewEx tvEx = findViewById(R.id.topNavViewBar);
-        TopNavigationViewHelper.setupTopNavigationView(tvEx);
-        TopNavigationViewHelper.enableNavigation(mContext, tvEx);
-        Menu menu = tvEx.getMenu();
-        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
-        menuItem.setChecked(true);
-    }
-    */
-
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
@@ -296,6 +280,10 @@ public class notesactivity extends AppCompatActivity {
                 firebaseAuth.signOut();
                 finish();
                 startActivity(new Intent(notesactivity.this, MainActivity.class));
+                break;
+
+            case R.id.ic_profile:
+                startActivity(new Intent(notesactivity.this, profile.class));
                 break;
 
         }

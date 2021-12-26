@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NotesAppFirebase">
         <activity
+            android:name=".profile"
+            android:exported="false" />
+        <activity
             android:name=".layout_top_navigation_view"
             android:exported="false" />
         <activity
