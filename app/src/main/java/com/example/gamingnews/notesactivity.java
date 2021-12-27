@@ -286,6 +286,10 @@ public class notesactivity extends AppCompatActivity {
                 startActivity(new Intent(notesactivity.this, profile.class));
                 break;
 
+            case R.id.ic_swipe:
+                startActivity(new Intent(notesactivity.this, notesactivity.class));
+                break;
+
         }
         return super.onOptionsItemSelected(item);
     }

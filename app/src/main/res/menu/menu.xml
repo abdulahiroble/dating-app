@@ -2,8 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/logout"
-        android:title="Logout">
+    <item android:id="@+id/ic_swipe"
+        android:title="Swipe">
 
     </item>
 
@@ -12,24 +12,9 @@
 
     </item>
 
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        android:visible="false"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/ic_main"
-        android:icon="@drawable/ic_main"
-        android:title="">
+    <item android:id="@+id/logout"
+        android:title="Logout">
 
     </item>
 
-    <item
-        android:id="@+id/ic_matched"
-        android:icon="@drawable/ic_matched"
-        android:title="">
-
-    </item>
 </menu>
