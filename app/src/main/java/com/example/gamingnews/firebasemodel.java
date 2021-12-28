@@ -4,16 +4,19 @@ public class firebasemodel {
 
     private String title;
     private String content;
+    private String email;
 
     public firebasemodel()
     {
 
     }
 
-    public firebasemodel (String title, String content)
+    public firebasemodel (String title, String content, String email)
     {
         this.title = title;
         this.content = content;
+        this.email = email;
+
     }
 
     public String getTitle() {
@@ -30,6 +33,14 @@ public class firebasemodel {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
 

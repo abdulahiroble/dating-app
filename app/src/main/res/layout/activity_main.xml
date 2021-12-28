@@ -7,6 +7,7 @@
     android:background="#f9f9f9"
     tools:context=".MainActivity">
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -78,6 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/loginpassword"
+            android:inputType="textPassword"
             android:hint="Enter your password">
 
         </EditText>

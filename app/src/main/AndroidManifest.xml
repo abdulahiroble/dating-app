@@ -10,27 +10,33 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NotesAppFirebase">
         <activity
-            android:name="com.example.gamingnews.notedetails"
+            android:name=".profile"
             android:exported="false" />
         <activity
-            android:name="com.example.gamingnews.editnoteactivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:name=".layout_top_navigation_view"
             android:exported="false" />
         <activity
-            android:name="com.example.gamingnews.createnote"
+            android:name=".notedetails"
+            android:exported="false" />
+        <activity
+            android:name=".editnoteactivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
-            android:name="com.example.gamingnews.notesactivity"
+            android:name=".createnote"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name=".notesactivity"
             android:exported="false" />
         <activity
-            android:name="com.example.gamingnews.forgotpassword"
+            android:name=".forgotpassword"
             android:exported="true" />
         <activity
-            android:name="com.example.gamingnews.signup"
+            android:name=".signup"
             android:exported="true" />
         <activity
-            android:name="com.example.gamingnews.MainActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
