@@ -9,18 +9,25 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -34,6 +41,9 @@ public class profile extends AppCompatActivity {
     FirebaseUser firebaseUser;
     FirebaseFirestore firebaseFirestore;
 
+    private ImageView imagePerson;
+    private TextView name;
+
     FirestoreRecyclerAdapter<firebasemodel, NoteViewHolder> noteAdapter;
 
     @Override
@@ -46,14 +56,36 @@ public class profile extends AppCompatActivity {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         firebaseFirestore = FirebaseFirestore.getInstance();
 
-        Query query = firebaseFirestore.collection("notes").document(firebaseUser.getUid()).collection("myNotes").orderBy("title", Query.Direction.ASCENDING);
+        // imagePerson = findViewById(R.id.circle_profile_image);
+        name = findViewById(R.id.notetitle);
+
+        Query query = firebaseFirestore.collection("notes").document(firebaseUser.getUid()).collection("myNotes");
 
         FirestoreRecyclerOptions<firebasemodel> allusers = new FirestoreRecyclerOptions.Builder<firebasemodel>().setQuery(query, firebasemodel.class).build();
+
+        DocumentReference docRef = firebaseFirestore.collection("notes").document("cZ3ECP2DjxO1cuQkdxNR");
+
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d("TAG", "DocumentSnapshot data: " + document.getData());
+                    } else {
+                        Log.d("TAG", "No such document");
+                    }
+                } else {
+                    Log.d("TAG", "get failed with ", task.getException());
+                }
+            }
+        });
 
         noteAdapter = new FirestoreRecyclerAdapter<firebasemodel, NoteViewHolder>(allusers) {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             protected void onBindViewHolder(@NonNull NoteViewHolder noteViewHolder, int i, @NonNull firebasemodel firebasemodel) {
+
 
                 noteViewHolder.notetitle.setText(firebasemodel.getTitle());
 
@@ -62,12 +94,12 @@ public class profile extends AppCompatActivity {
             @NonNull
             @Override
             public NoteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.notes_layout, parent, false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.profile_layout, parent, false);
                 return new NoteViewHolder(view);
             }
         };
 
-        /*
+
 
         mrecyclerview = findViewById(R.id.recycleview);
         mrecyclerview.setHasFixedSize(true);
@@ -76,7 +108,9 @@ public class profile extends AppCompatActivity {
 
         mrecyclerview.setAdapter(noteAdapter);
 
-         */
+
+
+
 
 
     }
