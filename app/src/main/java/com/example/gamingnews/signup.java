@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -29,9 +30,11 @@ import java.util.Map;
 
 public class signup extends AppCompatActivity {
 
-    private EditText msignupemail, msignuppasword;
-    private RelativeLayout msignup;
+    private EditText msignupemail, msignuppasword, mfirstname, mlastname, mage, mabout;
+    private Button msignup;
     private TextView mgotologin;
+
+
 
     FirebaseUser firebaseUser;
     FirebaseFirestore firebaseFirestore;
@@ -48,8 +51,12 @@ public class signup extends AppCompatActivity {
 
         msignupemail = findViewById(R.id.signupemail);
         msignuppasword = findViewById(R.id.signuppassword);
-        msignup = findViewById(R.id.signup);
+        msignup = (Button) findViewById(R.id.signupbutton);
         mgotologin = findViewById(R.id.gotologin);
+        mfirstname = findViewById(R.id.signupfirstname);
+        mlastname = findViewById(R.id.signuplastname);
+        mage = findViewById(R.id.signupage);
+        mabout = findViewById(R.id.signupabout);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -65,15 +72,21 @@ public class signup extends AppCompatActivity {
             }
         });
 
+
+
         msignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 String mail = msignupemail.getText().toString().trim();
                 String password = msignuppasword.getText().toString().trim();
+                String firstname = mfirstname.getText().toString().trim();
+                String lastname = mlastname.getText().toString().trim();
+                String age = mage.getText().toString().trim();
+                String about = mabout.getText().toString().trim();
 
 
-                if (mail.isEmpty() || password.isEmpty())
+                if (mail.isEmpty() || password.isEmpty() || firstname.isEmpty() || lastname.isEmpty() || age.isEmpty() || about.isEmpty())
                 {
                     Toast.makeText(getApplicationContext(), "All fields are required", Toast.LENGTH_SHORT).show();
                 }
@@ -108,6 +121,10 @@ public class signup extends AppCompatActivity {
 
                     Map<String, Object> user = new HashMap<>();
                     user.put("email", mail);
+                    user.put("firstname", firstname);
+                    user.put("lastname", lastname);
+                    user.put("age", age);
+                    user.put("about", about);
 
                     firebaseFirestore.collection("users").document()
                             .set(user)

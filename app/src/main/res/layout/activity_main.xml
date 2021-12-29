@@ -87,16 +87,14 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-
-
     <RelativeLayout
         android:id="@+id/login"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_below="@+id/passwword"
         android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
         android:layout_marginTop="30dp"
+        android:layout_marginRight="30dp"
         android:background="@drawable/button_design">
 
         <TextView
@@ -126,15 +124,17 @@
 
     </TextView>
 
-    <RelativeLayout
+
+
+    <!-- <RelativeLayout
         android:id="@+id/gotosignup"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginLeft="30dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/button_design">
 
         <TextView
@@ -148,9 +148,31 @@
             android:textStyle="bold">
 
         </TextView>
-    </RelativeLayout>
+    </RelativeLayout> -->
 
 
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="30dp"
+    android:layout_marginRight="30dp"
+    android:layout_above="@+id/centerline"
+    android:layout_marginBottom="-250dp"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/signupbutton"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:text="New User?">
+
+
+    </Button>
+</LinearLayout>
 
 </RelativeLayout>
+
+
 

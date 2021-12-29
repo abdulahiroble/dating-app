@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -21,8 +22,9 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
 
     private EditText mloginemail, mloginpassword;
-    private RelativeLayout mlogin, mgotosignup;
+    private RelativeLayout mlogin;
     private TextView mgotoforgotpassword;
+    private Button button;
 
     private FirebaseAuth firebaseAuth;
 
@@ -37,7 +39,14 @@ public class MainActivity extends AppCompatActivity {
         mloginpassword = findViewById(R.id.loginpassword);
         mlogin = findViewById(R.id.login);
         mgotoforgotpassword = findViewById(R.id.gotoforgotpassword);
-        mgotosignup = findViewById(R.id.gotosignup);
+        button = (Button) findViewById(R.id.signupbutton);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, signup.class));
+            }
+        });
 
 
         firebaseAuth = firebaseAuth.getInstance();
@@ -47,14 +56,9 @@ public class MainActivity extends AppCompatActivity {
         {
             finish();
             startActivity(new Intent(MainActivity.this,notesactivity.class));
-        }
+        };
 
-        mgotosignup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, signup.class));
-            }
-        });
+
 
         mgotoforgotpassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,6 +104,11 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    /* public void openActivity2() {
+        Intent intent = new Intent(MainActivity.this, signup.class);
+        startActivity(intent);
+    } */
 
 
     private void checkmailverification()
