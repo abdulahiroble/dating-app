@@ -1,12 +1,15 @@
 package com.example.gamingnews;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,17 +22,27 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.util.UUID;
 
 public class profile extends AppCompatActivity {
 
@@ -41,7 +54,12 @@ public class profile extends AppCompatActivity {
     FirebaseUser firebaseUser;
     FirebaseFirestore firebaseFirestore;
 
-    private ImageView imagePerson;
+    private ImageView articleImage;
+    public Uri imageUri;
+    private FirebaseStorage storage;
+    private StorageReference storageReference;
+
+
     private TextView name;
 
     FirestoreRecyclerAdapter<firebasemodel, NoteViewHolder> noteAdapter;
@@ -50,14 +68,25 @@ public class profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        articleImage = findViewById(R.id.articleImage);
+
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+
+        articleImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                choosePicture();
+            }
+        });
 
         firebaseAuth = FirebaseAuth.getInstance();
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         firebaseFirestore = FirebaseFirestore.getInstance();
 
-        // imagePerson = findViewById(R.id.circle_profile_image);
         name = findViewById(R.id.notetitle);
+
 
         Query query = firebaseFirestore.collection("notes").document(firebaseUser.getUid()).collection("myNotes");
 
@@ -81,7 +110,7 @@ public class profile extends AppCompatActivity {
             }
         });
 
-        noteAdapter = new FirestoreRecyclerAdapter<firebasemodel, NoteViewHolder>(allusers) {
+       noteAdapter = new FirestoreRecyclerAdapter<firebasemodel, NoteViewHolder>(allusers) {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             protected void onBindViewHolder(@NonNull NoteViewHolder noteViewHolder, int i, @NonNull firebasemodel firebasemodel) {
@@ -97,11 +126,14 @@ public class profile extends AppCompatActivity {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.profile_layout, parent, false);
                 return new NoteViewHolder(view);
             }
+
+
         };
 
 
 
-        mrecyclerview = findViewById(R.id.recycleview);
+
+       mrecyclerview = findViewById(R.id.recycleview);
         mrecyclerview.setHasFixedSize(true);
         staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         mrecyclerview.setLayoutManager(staggeredGridLayoutManager);
@@ -111,9 +143,9 @@ public class profile extends AppCompatActivity {
 
 
 
-
-
     }
+
+
 
 
     public class NoteViewHolder extends RecyclerView.ViewHolder {
@@ -130,7 +162,6 @@ public class profile extends AppCompatActivity {
 
 
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -177,6 +208,59 @@ public class profile extends AppCompatActivity {
         {
             noteAdapter.stopListening();
         }
+
+    }
+
+
+        private void choosePicture() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode ==1 && resultCode==RESULT_OK && data!=null && data.getData()!=null) {
+            imageUri = data.getData();
+            articleImage.setImageURI(imageUri);
+            uploadPicture();
+        }
+    }
+
+    private void uploadPicture() {
+
+        final ProgressDialog pd = new ProgressDialog(this);
+        pd.setTitle("Uploading image...");
+        pd.show();
+
+        final String randomKey = UUID.randomUUID().toString();
+        StorageReference mountainRef = storageReference.child("images/" + randomKey);
+
+        mountainRef.putFile(imageUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        pd.dismiss();
+                        Snackbar.make(findViewById(android.R.id.content), "Image Uploaded.", Snackbar.LENGTH_LONG).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        pd.dismiss();
+                        Toast.makeText(getApplicationContext(), "Failed To Upload.", Toast.LENGTH_LONG).show();
+
+                    }
+                })
+                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+                        double progressPercent = (100.00 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                        pd.setMessage("Percentage:" + (int) progressPercent + "%");
+                    }
+                });
     }
 
 }
