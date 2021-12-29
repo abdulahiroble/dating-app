@@ -59,27 +59,9 @@ public class profile extends AppCompatActivity {
         // imagePerson = findViewById(R.id.circle_profile_image);
         name = findViewById(R.id.notetitle);
 
-        Query query = firebaseFirestore.collection("notes").document(firebaseUser.getUid()).collection("myNotes");
+        Query query = firebaseFirestore.collection("users").document("5XrpTV1uVu2wJASOy1YZ").collection("user");
 
         FirestoreRecyclerOptions<firebasemodel> allusers = new FirestoreRecyclerOptions.Builder<firebasemodel>().setQuery(query, firebasemodel.class).build();
-
-        DocumentReference docRef = firebaseFirestore.collection("notes").document("cZ3ECP2DjxO1cuQkdxNR");
-
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        Log.d("TAG", "DocumentSnapshot data: " + document.getData());
-                    } else {
-                        Log.d("TAG", "No such document");
-                    }
-                } else {
-                    Log.d("TAG", "get failed with ", task.getException());
-                }
-            }
-        });
 
         noteAdapter = new FirestoreRecyclerAdapter<firebasemodel, NoteViewHolder>(allusers) {
             @RequiresApi(api = Build.VERSION_CODES.M)
@@ -87,7 +69,7 @@ public class profile extends AppCompatActivity {
             protected void onBindViewHolder(@NonNull NoteViewHolder noteViewHolder, int i, @NonNull firebasemodel firebasemodel) {
 
 
-                noteViewHolder.notetitle.setText(firebasemodel.getTitle());
+                noteViewHolder.notetitle.setText(firebasemodel.getEmail());
 
             }
 

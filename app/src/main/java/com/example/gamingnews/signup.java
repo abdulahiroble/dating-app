@@ -107,7 +107,7 @@ public class signup extends AppCompatActivity {
                             {
                                 Toast.makeText(getApplicationContext(), "Registration is successfull", Toast.LENGTH_SHORT).show();
 
-                                sendEmailVerification();
+                                // sendEmailVerification();
 
                             }
                             else
@@ -119,28 +119,28 @@ public class signup extends AppCompatActivity {
 
                     });
 
-                    Map<String, Object> user = new HashMap<>();
-                    user.put("email", mail);
-                    user.put("firstname", firstname);
-                    user.put("lastname", lastname);
-                    user.put("age", age);
-                    user.put("about", about);
 
-                    firebaseFirestore.collection("users").document()
-                            .set(user)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Log.d("TAG", "DocumentSnapshot successfully written!");
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.w("TAG", "Error writing document", e);
-                                }
-                            });
+                    DocumentReference documentReference = firebaseFirestore.collection("users").document().collection("user").document();
+                    Map<String, Object> note = new HashMap<>();
+                    note.put("email", mail);
+                    note.put("firstname", firstname);
+                    note.put("lastname", lastname);
+                    note.put("age", age);
+                    note.put("about", about);
 
+                    documentReference.set(note).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(getApplicationContext(), "Note created succesfully", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getApplicationContext(), "Failed to create note", Toast.LENGTH_SHORT).show();
+                            // startActivity(new Intent(createnote.this, notesactivity.class));
+                        }
+                    });
 
 
 
@@ -150,6 +150,7 @@ public class signup extends AppCompatActivity {
 
     }
 
+    /*
     // Send email verification
     private void sendEmailVerification()
     {
@@ -173,4 +174,6 @@ public class signup extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Failed to send verification email", Toast.LENGTH_SHORT).show();
         }
     }
+
+     */
 }
