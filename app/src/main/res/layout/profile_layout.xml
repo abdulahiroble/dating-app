@@ -8,6 +8,8 @@
     android:weightSum="10"
     tools:context=".MainActivity">
 
+
+
     <ImageView
         android:id="@+id/articleImage"
         android:layout_width="match_parent"
@@ -16,10 +18,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="2dp"
-        android:layout_marginTop="424dp"
+        android:layout_marginTop="124dp"
         android:src="@drawable/ic_baseline_insert_photo_24" />
-
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -50,6 +50,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
+
+
 
             <ImageButton
                 android:id="@+id/edit_profile"
@@ -85,6 +87,8 @@
                 android:gravity="center"
                 android:padding="15dp"
                 android:src="@drawable/ic_settings" />
+
+
         </LinearLayout>
 
 

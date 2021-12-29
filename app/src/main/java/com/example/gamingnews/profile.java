@@ -73,12 +73,12 @@ public class profile extends AppCompatActivity {
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
-        articleImage.setOnClickListener(new View.OnClickListener() {
+        /* articleImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 choosePicture();
             }
-        });
+        }); */
 
         firebaseAuth = FirebaseAuth.getInstance();
 
