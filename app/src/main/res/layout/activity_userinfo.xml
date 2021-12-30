@@ -121,26 +121,12 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/gotologin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/signup"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="50dp"
-                android:layout_marginRight="20dp"
-                android:text="Want to login ?"
-                android:textAlignment="center"
-                android:textColor="@color/black">
-
-            </TextView>
-
             <Button
 
                 android:id="@+id/signupbutton"
                 android:layout_width="300dp"
                 android:layout_height="60dp"
-                android:text="Sign Up" />
+                android:text="Add information" />
 
 
         </LinearLayout>
