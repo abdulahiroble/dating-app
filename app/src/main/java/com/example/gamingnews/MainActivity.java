@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (mail.isEmpty() || password.isEmpty())
                 {
-                    Toast.makeText(getApplicationContext(), "All fields are reqquired", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "All fields are required", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {

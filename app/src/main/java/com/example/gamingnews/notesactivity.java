@@ -101,7 +101,7 @@ public class notesactivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(notesactivity.this, createnote.class));
+                startActivity(new Intent(notesactivity.this, userinfo.class));
 
             }
         });

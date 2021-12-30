@@ -59,7 +59,7 @@ public class profile extends AppCompatActivity {
         // imagePerson = findViewById(R.id.circle_profile_image);
         name = findViewById(R.id.notetitle);
 
-        Query query = firebaseFirestore.collection("users").document("5XrpTV1uVu2wJASOy1YZ").collection("user");
+        Query query = firebaseFirestore.collection("users").document(firebaseUser.getUid()).collection("user");
 
         FirestoreRecyclerOptions<firebasemodel> allusers = new FirestoreRecyclerOptions.Builder<firebasemodel>().setQuery(query, firebasemodel.class).build();
 
@@ -69,7 +69,7 @@ public class profile extends AppCompatActivity {
             protected void onBindViewHolder(@NonNull NoteViewHolder noteViewHolder, int i, @NonNull firebasemodel firebasemodel) {
 
 
-                noteViewHolder.notetitle.setText(firebasemodel.getEmail());
+                noteViewHolder.notetitle.setText(firebasemodel.getFirstname());
 
             }
 

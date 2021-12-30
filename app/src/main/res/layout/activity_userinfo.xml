@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="New user"
+            android:text="User info"
             android:textColor="#FFBD4D"
             android:textSize="42sp"
             android:textStyle="bold"
@@ -27,7 +27,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nice to see you here"
+            android:text="Write your personal details"
             android:textSize="23sp"
             android:textColor="#FF8596"
             android:textAlignment="center">
@@ -41,23 +41,22 @@
             android:gravity="center"
             android:layout_margin="20dp">
 
-
-
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/centerline2"
-                android:layout_marginBottom="10dp"
-                android:id="@+id/email"
+                android:layout_below="@+id/centerline2"
+                android:layout_marginTop="10dp"
+                android:id="@+id/firstname"
                 android:layout_marginRight="30dp"
-                android:layout_marginLeft="30dp">
+                android:layout_marginLeft="30dp"
+                android:layout_marginBottom="10dp"
+                >
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/signupemail"
-                    android:hint="Enter your email"
-                    android:inputType="textEmailAddress">
+                    android:id="@+id/signupfirstname"
+                    android:hint="Enter your firstname">
 
                 </EditText>
 
@@ -68,22 +67,59 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/centerline2"
                 android:layout_marginTop="10dp"
-                android:id="@+id/passwword"
+                android:id="@+id/lastname"
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp"
-                app:passwordToggleEnabled="true"
                 android:layout_marginBottom="10dp">
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/signuppassword"
-                    android:hint="Enter your password">
+                    android:id="@+id/signuplastname"
+                    android:hint="Enter your lastname">
 
                 </EditText>
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/centerline2"
+                android:layout_marginTop="10dp"
+                android:id="@+id/age"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginBottom="10dp" >
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/signupage"
+                    android:hint="Enter your age">
+
+                </EditText>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/centerline2"
+                android:layout_marginTop="10dp"
+                android:id="@+id/about"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp" >
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:id="@+id/signupabout"
+                    android:hint="Write something about yourself" >
+
+                </EditText>
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/gotologin"

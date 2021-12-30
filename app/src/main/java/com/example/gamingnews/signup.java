@@ -53,10 +53,11 @@ public class signup extends AppCompatActivity {
         msignuppasword = findViewById(R.id.signuppassword);
         msignup = (Button) findViewById(R.id.signupbutton);
         mgotologin = findViewById(R.id.gotologin);
-        mfirstname = findViewById(R.id.signupfirstname);
-        mlastname = findViewById(R.id.signuplastname);
-        mage = findViewById(R.id.signupage);
-        mabout = findViewById(R.id.signupabout);
+
+        // mfirstname = findViewById(R.id.signupfirstname);
+        // mlastname = findViewById(R.id.signuplastname);
+        // mage = findViewById(R.id.signupage);
+        // mabout = findViewById(R.id.signupabout);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -80,13 +81,13 @@ public class signup extends AppCompatActivity {
 
                 String mail = msignupemail.getText().toString().trim();
                 String password = msignuppasword.getText().toString().trim();
-                String firstname = mfirstname.getText().toString().trim();
-                String lastname = mlastname.getText().toString().trim();
-                String age = mage.getText().toString().trim();
-                String about = mabout.getText().toString().trim();
+                // String firstname = mfirstname.getText().toString().trim();
+                // String lastname = mlastname.getText().toString().trim();
+                // String age = mage.getText().toString().trim();
+                // String about = mabout.getText().toString().trim();
 
 
-                if (mail.isEmpty() || password.isEmpty() || firstname.isEmpty() || lastname.isEmpty() || age.isEmpty() || about.isEmpty())
+                if (mail.isEmpty() || password.isEmpty())
                 {
                     Toast.makeText(getApplicationContext(), "All fields are required", Toast.LENGTH_SHORT).show();
                 }
@@ -119,6 +120,7 @@ public class signup extends AppCompatActivity {
 
                     });
 
+                    /*
 
                     DocumentReference documentReference = firebaseFirestore.collection("users").document().collection("user").document();
                     Map<String, Object> note = new HashMap<>();
@@ -131,16 +133,19 @@ public class signup extends AppCompatActivity {
                     documentReference.set(note).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            Toast.makeText(getApplicationContext(), "Note created succesfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Account created succesfully", Toast.LENGTH_SHORT).show();
 
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getApplicationContext(), "Failed to create note", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Failed to create account", Toast.LENGTH_SHORT).show();
                             // startActivity(new Intent(createnote.this, notesactivity.class));
                         }
                     });
+
+                     */
+
 
 
 
