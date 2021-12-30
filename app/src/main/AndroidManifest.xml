@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NotesAppFirebase">
         <activity
+            android:name=".editprofile"
+            android:exported="false" />
+        <activity
             android:name=".userinfo"
             android:exported="false" />
         <activity
