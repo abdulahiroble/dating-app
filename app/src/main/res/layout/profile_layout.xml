@@ -46,6 +46,18 @@
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/menupopbutton"
+                android:layout_weight="0"
+                android:src="@drawable/ic_baseline_more_vert_24"
+                >
+
+            </ImageView>
+
+
+
             <ImageButton
                 android:id="@+id/edit_profile"
                 android:layout_width="wrap_content"
@@ -54,7 +66,6 @@
                 android:layout_marginRight="30dp"
                 android:background="@drawable/circle_background"
                 android:gravity="center"
-                android:onClick="Edit_Profile"
                 android:padding="15dp"
                 android:src="@drawable/ic_edit"
                 tools:ignore="NotSibling" />

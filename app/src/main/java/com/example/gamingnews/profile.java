@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,11 +19,15 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -59,35 +64,47 @@ public class profile extends AppCompatActivity {
         // imagePerson = findViewById(R.id.circle_profile_image);
         name = findViewById(R.id.notetitle);
 
-        Query query = firebaseFirestore.collection("notes").document(firebaseUser.getUid()).collection("myNotes");
+        Query query = firebaseFirestore.collection("users").document(firebaseUser.getUid()).collection("user");
 
         FirestoreRecyclerOptions<firebasemodel> allusers = new FirestoreRecyclerOptions.Builder<firebasemodel>().setQuery(query, firebasemodel.class).build();
-
-        DocumentReference docRef = firebaseFirestore.collection("notes").document("cZ3ECP2DjxO1cuQkdxNR");
-
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        Log.d("TAG", "DocumentSnapshot data: " + document.getData());
-                    } else {
-                        Log.d("TAG", "No such document");
-                    }
-                } else {
-                    Log.d("TAG", "get failed with ", task.getException());
-                }
-            }
-        });
 
         noteAdapter = new FirestoreRecyclerAdapter<firebasemodel, NoteViewHolder>(allusers) {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             protected void onBindViewHolder(@NonNull NoteViewHolder noteViewHolder, int i, @NonNull firebasemodel firebasemodel) {
 
+                ImageButton popbutton = noteViewHolder.itemView.findViewById(R.id.edit_profile);
 
-                noteViewHolder.notetitle.setText(firebasemodel.getTitle());
+                noteViewHolder.notetitle.setText(firebasemodel.getFirstname());
+
+                String docId = noteAdapter.getSnapshots().getSnapshot(i).getId();
+
+
+                popbutton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        PopupMenu popupMenu = new PopupMenu(v.getContext(), v);
+                        popupMenu.setGravity(Gravity.END);
+                        popupMenu.getMenu().add("Edit").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                            @Override
+                            public boolean onMenuItemClick(MenuItem item) {
+
+                                Intent intent = new Intent(v.getContext(), editnoteactivity.class);
+
+                                intent.putExtra("title", firebasemodel.getFirstname());
+                                intent.putExtra("noteId", docId);
+
+                                v.getContext().startActivity(intent);
+
+                                return false;
+                            }
+                        });
+
+                        popupMenu.show();
+
+                    }
+                });
 
             }
 

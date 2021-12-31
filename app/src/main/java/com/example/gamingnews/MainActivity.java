@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (mail.isEmpty() || password.isEmpty())
                 {
-                    Toast.makeText(getApplicationContext(), "All fields are reqquired", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "All fields are required", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -105,15 +105,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /* public void openActivity2() {
-        Intent intent = new Intent(MainActivity.this, signup.class);
-        startActivity(intent);
-    } */
+
 
 
     private void checkmailverification()
     {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+
+        Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
+        finish();
+        startActivity(new Intent(MainActivity.this,notesactivity.class));
+
+        /*
 
         if (firebaseUser.isEmailVerified())
         {
@@ -126,6 +129,9 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Verify your mail first", Toast.LENGTH_SHORT).show();
             firebaseAuth.signOut();
         }
+
+         */
+
     }
 }
 

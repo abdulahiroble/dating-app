@@ -92,7 +92,7 @@ public class createnote extends AppCompatActivity {
                     DocumentReference documentReference = firebaseFirestore.collection("notes").document(firebaseUser.getUid()).collection("myNotes").document();
                     Map<String, Object> note = new HashMap<>();
                     note.put("title", title);
-                    note.put("content", content);
+                    // note.put("content", content);
 
                     documentReference.set(note).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
