@@ -90,9 +90,9 @@ public class profile extends AppCompatActivity {
                             @Override
                             public boolean onMenuItemClick(MenuItem item) {
 
-                                Intent intent = new Intent(v.getContext(), editnoteactivity.class);
+                                Intent intent = new Intent(v.getContext(), editprofile.class);
 
-                                intent.putExtra("title", firebasemodel.getFirstname());
+                                intent.putExtra("firstname", firebasemodel.getFirstname());
                                 intent.putExtra("noteId", docId);
 
                                 v.getContext().startActivity(intent);
