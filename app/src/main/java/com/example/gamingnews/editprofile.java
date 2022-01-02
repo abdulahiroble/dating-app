@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +28,7 @@ public class editprofile extends AppCompatActivity {
 
     Intent data;
 
-    EditText medittitleofnote, meditcontentofnote;
+    EditText meditfirstname, meditlastname, meditage, meditabout;
     FloatingActionButton msaveeditnote;
 
     FirebaseAuth firebaseAuth;
@@ -39,8 +40,10 @@ public class editprofile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editprofile);
 
-        medittitleofnote = findViewById(R.id.edittitleofnote);
-        meditcontentofnote = findViewById(R.id.editcontentofnote);
+        meditfirstname = findViewById(R.id.editfirstname);
+        meditlastname = findViewById(R.id.editlastname);
+        meditage = findViewById(R.id.editage);
+        meditabout = findViewById(R.id.editabout);
         msaveeditnote = findViewById(R.id.saveeditnote);
 
         data = getIntent();
@@ -53,9 +56,12 @@ public class editprofile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String newtitle = medittitleofnote.getText().toString();
+                String newtitle = meditfirstname.getText().toString();
+                String newlastname = meditlastname.getText().toString();
+                String newAge = meditage.getText().toString();
+                String newAbout = meditabout.getText().toString();
 
-                if (newtitle.isEmpty())
+                if (newtitle.isEmpty() || newlastname.isEmpty() || newAge.isEmpty() || newAbout.isEmpty())
                 {
                     Toast.makeText(getApplicationContext(), "Something is empty", Toast.LENGTH_SHORT).show();
                     return;
@@ -67,8 +73,11 @@ public class editprofile extends AppCompatActivity {
                     Map <String, Object> note = new HashMap<>();
 
                     note.put("firstname", newtitle);
+                    note.put("lastname", newlastname);
+                    note.put("age", newAge);
+                    note.put("about", newAbout);
 
-                    documentReference.set(note).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    documentReference.set(note, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
                             Toast.makeText(getApplicationContext(), "Profile updated", Toast.LENGTH_SHORT).show();
@@ -87,7 +96,14 @@ public class editprofile extends AppCompatActivity {
         });
 
         String notetitle = data.getStringExtra("firstname");
-        medittitleofnote.setText(notetitle);
+        String lastname = data.getStringExtra("lastname");
+        String age = data.getStringExtra("age");
+        String about = data.getStringExtra("about");
+
+        meditfirstname.setText(notetitle);
+        meditlastname.setText(lastname);
+        meditage.setText(age);
+        meditabout.setText(about);
 
 
 

@@ -75,10 +75,13 @@ public class userinfo extends AppCompatActivity {
 
 
                     DocumentReference documentReference = firebaseFirestore.collection("users").document(firebaseUser.getUid()).collection("user").document();
-                    Map<String, Object> note = new HashMap<>();
-                    note.put("firstname", firstname);
+                    Map<String, Object> user = new HashMap<>();
+                    user.put("firstname", firstname);
+                    user.put("lastname", lastname);
+                    user.put("age", age);
+                    user.put("about", about);
 
-                    documentReference.set(note).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    documentReference.set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             Toast.makeText(getApplicationContext(), "User created succesfully", Toast.LENGTH_SHORT).show();

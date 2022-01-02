@@ -6,18 +6,24 @@ public class firebasemodel {
     private String content;
     private String email;
     private String firstname;
+    private String lastname;
+    private String age;
+    private String about;
 
     public firebasemodel()
     {
 
     }
 
-    public firebasemodel (String title, String content, String email, String firstname)
+    public firebasemodel (String title, String content, String email, String firstname, String lastname, String age, String about)
     {
         this.title = title;
         this.content = content;
         this.email = email;
         this.firstname = firstname;
+        this.lastname = lastname;
+        this.age = age;
+        this.about = about;
 
     }
 
@@ -52,6 +58,30 @@ public class firebasemodel {
 
     public void setFirstname(String firstname) {
         this.firstname = firstname;
+    }
+
+    public String getLastname () {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getAge () {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getAbout () {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
     }
 
 
