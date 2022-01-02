@@ -120,11 +120,11 @@ public class profile extends AppCompatActivity {
 
                                     @Override
                                     public void onSuccess(Void unused) {
+                                        Toast.makeText(v.getContext(), "Profile has been deleted sucessfully", Toast.LENGTH_SHORT).show();
 
                                         firebaseUser.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void unused) {
-                                                Toast.makeText(v.getContext(), "Profile has been deleted sucessfully", Toast.LENGTH_SHORT).show();
 
                                                 firebaseAuth.signOut();
                                                 finish();
