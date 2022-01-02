@@ -2,7 +2,6 @@ package com.example.gamingnews;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -26,9 +27,10 @@ public class editprofile extends AppCompatActivity {
 
     Intent data;
 
-    EditText medittitleofnote;
+    EditText medittitleofnote, meditcontentofnote;
     FloatingActionButton msaveeditnote;
 
+    FirebaseAuth firebaseAuth;
     FirebaseFirestore firebaseFirestore;
     FirebaseUser firebaseUser;
 
@@ -38,6 +40,7 @@ public class editprofile extends AppCompatActivity {
         setContentView(R.layout.activity_editprofile);
 
         medittitleofnote = findViewById(R.id.edittitleofnote);
+        meditcontentofnote = findViewById(R.id.editcontentofnote);
         msaveeditnote = findViewById(R.id.saveeditnote);
 
         data = getIntent();
@@ -45,10 +48,6 @@ public class editprofile extends AppCompatActivity {
         firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-
-        Toolbar toolbar = findViewById(R.id.toolbarofeditnote);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         msaveeditnote.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,11 +62,11 @@ public class editprofile extends AppCompatActivity {
                 }
                 else
                 {
-                    DocumentReference documentReference = firebaseFirestore.collection("users").document(firebaseUser.getUid()).collection("myNotes").document(data.getStringExtra("noteId"));
+                    DocumentReference documentReference = firebaseFirestore.collection("users").document(firebaseUser.getUid()).collection("user").document(data.getStringExtra("noteId"));
 
-                    Map<String, Object> note = new HashMap<>();
+                    Map <String, Object> note = new HashMap<>();
 
-                    note.put("title", newtitle);
+                    note.put("firstname", newtitle);
 
                     documentReference.set(note).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -78,7 +77,7 @@ public class editprofile extends AppCompatActivity {
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getApplicationContext(), "Failed to update profile", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Failed to update", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -87,19 +86,15 @@ public class editprofile extends AppCompatActivity {
             }
         });
 
-        String notetitle = data.getStringExtra("title");
+        String notetitle = data.getStringExtra("firstname");
         medittitleofnote.setText(notetitle);
+
+
+
+
+
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        if (item.getItemId() == android.R.id.home);
-        {
-            onBackPressed();
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
 }

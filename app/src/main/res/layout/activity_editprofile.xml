@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".editnoteactivity">
 
-    <androidx.appcompat.widget.Toolbar
+    <androidx.appcompat.widget.ActionMenuView
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:id="@+id/toolbarofeditnote"
@@ -24,20 +24,9 @@
             android:id="@+id/edittitleofnote" />
 
 
-    </androidx.appcompat.widget.Toolbar>
+    </androidx.appcompat.widget.ActionMenuView>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="15sp"
-        android:background="#faf7f7"
-        android:gravity="top|left"
-        android:textColor="@color/black"
-        android:layout_below="@+id/toolbarofeditnote"
-        android:padding="15dp"
-        android:id="@+id/editcontentofnote">
 
-    </EditText>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/saveeditnote"
