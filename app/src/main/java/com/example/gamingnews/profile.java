@@ -98,6 +98,9 @@ public class profile extends AppCompatActivity {
                                 Intent intent = new Intent(v.getContext(), editprofile.class);
 
                                 intent.putExtra("firstname", firebasemodel.getFirstname());
+                                intent.putExtra("lastname", firebasemodel.getLastname());
+                                intent.putExtra("age", firebasemodel.getAge());
+                                intent.putExtra("about", firebasemodel.getAbout());
                                 intent.putExtra("noteId", docId);
 
                                 v.getContext().startActivity(intent);
@@ -111,9 +114,6 @@ public class profile extends AppCompatActivity {
                             public boolean onMenuItemClick(MenuItem item) {
 
                                 DocumentReference documentReference = firebaseFirestore.collection("users").document(firebaseUser.getUid()).collection("user").document(docId);
-
-
-
 
                                 documentReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
 
