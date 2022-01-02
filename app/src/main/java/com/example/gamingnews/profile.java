@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -29,6 +30,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -39,6 +42,8 @@ import com.google.firebase.firestore.Query;
 public class profile extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
+
+    private EditText msignupemail, msignuppasword;
 
     RecyclerView mrecyclerview;
     StaggeredGridLayoutManager staggeredGridLayoutManager;
@@ -96,6 +101,52 @@ public class profile extends AppCompatActivity {
                                 intent.putExtra("noteId", docId);
 
                                 v.getContext().startActivity(intent);
+
+                                return false;
+                            }
+                        });
+
+                        popupMenu.getMenu().add("Delete").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                            @Override
+                            public boolean onMenuItemClick(MenuItem item) {
+
+                                DocumentReference documentReference = firebaseFirestore.collection("users").document(firebaseUser.getUid()).collection("user").document(docId);
+
+
+
+
+                                documentReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+
+
+                                    @Override
+                                    public void onSuccess(Void unused) {
+
+                                        firebaseUser.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                Toast.makeText(v.getContext(), "Profile has been deleted sucessfully", Toast.LENGTH_SHORT).show();
+
+                                                firebaseAuth.signOut();
+                                                finish();
+                                                startActivity(new Intent(profile.this, MainActivity.class));
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(v.getContext(), "Failed to delete profile", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+
+                                        firebaseAuth.signOut();
+                                        finish();
+                                        startActivity(new Intent(profile.this, MainActivity.class));
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(v.getContext(), "Failed to delete note", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
 
                                 return false;
                             }
