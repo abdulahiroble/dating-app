@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -38,6 +39,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 public class profile extends AppCompatActivity {
 
@@ -50,6 +54,10 @@ public class profile extends AppCompatActivity {
 
     FirebaseUser firebaseUser;
     FirebaseFirestore firebaseFirestore;
+
+    private StorageReference storageReference;
+
+    private ImageView profileImage;
 
     private ImageView imagePerson;
     private TextView name;
@@ -66,8 +74,12 @@ public class profile extends AppCompatActivity {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         firebaseFirestore = FirebaseFirestore.getInstance();
 
+        storageReference = FirebaseStorage.getInstance().getReference();
+
+
         // imagePerson = findViewById(R.id.circle_profile_image);
         name = findViewById(R.id.notetitle);
+
 
         Query query = firebaseFirestore.collection("users").document(firebaseUser.getUid()).collection("user");
 
