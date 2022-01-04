@@ -47,20 +47,11 @@ public class profile extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
 
-    private EditText msignupemail, msignuppasword;
-
     RecyclerView mrecyclerview;
     StaggeredGridLayoutManager staggeredGridLayoutManager;
 
     FirebaseUser firebaseUser;
     FirebaseFirestore firebaseFirestore;
-
-    private StorageReference storageReference;
-
-    private ImageView profileImage;
-
-    private ImageView imagePerson;
-    private TextView name;
 
     FirestoreRecyclerAdapter<firebasemodel, NoteViewHolder> noteAdapter;
 
@@ -74,12 +65,6 @@ public class profile extends AppCompatActivity {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         firebaseFirestore = FirebaseFirestore.getInstance();
 
-        storageReference = FirebaseStorage.getInstance().getReference();
-
-
-        // imagePerson = findViewById(R.id.circle_profile_image);
-        name = findViewById(R.id.notetitle);
-
 
         Query query = firebaseFirestore.collection("users").document(firebaseUser.getUid()).collection("user");
 
@@ -92,7 +77,7 @@ public class profile extends AppCompatActivity {
 
                 ImageButton popbutton = noteViewHolder.itemView.findViewById(R.id.edit_profile);
 
-                noteViewHolder.notetitle.setText(firebasemodel.getFirstname());
+                noteViewHolder.firstname.setText(firebasemodel.getFirstname());
 
                 String docId = noteAdapter.getSnapshots().getSnapshot(i).getId();
 
@@ -149,9 +134,11 @@ public class profile extends AppCompatActivity {
                                             }
                                         });
 
+                                        /*
                                         firebaseAuth.signOut();
                                         finish();
                                         startActivity(new Intent(profile.this, MainActivity.class));
+                                         */
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
@@ -197,14 +184,12 @@ public class profile extends AppCompatActivity {
 
 
     public class NoteViewHolder extends RecyclerView.ViewHolder {
-        private TextView notetitle;
-        private TextView notecontent;
+        private TextView firstname;
         LinearLayout mnote;
 
         public NoteViewHolder(@NonNull View itemView) {
             super(itemView);
-            notetitle = itemView.findViewById(R.id.notetitle);
-            notecontent = itemView.findViewById(R.id.notecontent);
+            firstname = itemView.findViewById(R.id.firstname);
             mnote = itemView.findViewById(R.id.note);
         }
 
