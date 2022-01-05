@@ -112,11 +112,7 @@ public class MainActivity extends AppCompatActivity {
     {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
-        Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
-        finish();
-        startActivity(new Intent(MainActivity.this,notesactivity.class));
 
-        /*
 
         if (firebaseUser.isEmailVerified())
         {
@@ -130,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
             firebaseAuth.signOut();
         }
 
-         */
+
 
     }
 }

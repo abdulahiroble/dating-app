@@ -30,7 +30,7 @@ import java.util.Map;
 
 public class signup extends AppCompatActivity {
 
-    private EditText msignupemail, msignuppasword, mfirstname, mlastname, mage, mabout;
+    private EditText msignupemail, msignuppasword;
     private Button msignup;
     private TextView mgotologin;
 
@@ -54,11 +54,6 @@ public class signup extends AppCompatActivity {
         msignup = (Button) findViewById(R.id.signupbutton);
         mgotologin = findViewById(R.id.gotologin);
 
-        // mfirstname = findViewById(R.id.signupfirstname);
-        // mlastname = findViewById(R.id.signuplastname);
-        // mage = findViewById(R.id.signupage);
-        // mabout = findViewById(R.id.signupabout);
-
         firebaseAuth = FirebaseAuth.getInstance();
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -81,11 +76,6 @@ public class signup extends AppCompatActivity {
 
                 String mail = msignupemail.getText().toString().trim();
                 String password = msignuppasword.getText().toString().trim();
-                // String firstname = mfirstname.getText().toString().trim();
-                // String lastname = mlastname.getText().toString().trim();
-                // String age = mage.getText().toString().trim();
-                // String about = mabout.getText().toString().trim();
-
 
                 if (mail.isEmpty() || password.isEmpty())
                 {
@@ -108,7 +98,7 @@ public class signup extends AppCompatActivity {
                             {
                                 Toast.makeText(getApplicationContext(), "Registration is successfull", Toast.LENGTH_SHORT).show();
 
-                                // sendEmailVerification();
+                                sendEmailVerification();
 
                             }
                             else
@@ -120,34 +110,6 @@ public class signup extends AppCompatActivity {
 
                     });
 
-                    /*
-
-                    DocumentReference documentReference = firebaseFirestore.collection("users").document().collection("user").document();
-                    Map<String, Object> note = new HashMap<>();
-                    note.put("email", mail);
-                    note.put("firstname", firstname);
-                    note.put("lastname", lastname);
-                    note.put("age", age);
-                    note.put("about", about);
-
-                    documentReference.set(note).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            Toast.makeText(getApplicationContext(), "Account created succesfully", Toast.LENGTH_SHORT).show();
-
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getApplicationContext(), "Failed to create account", Toast.LENGTH_SHORT).show();
-                            // startActivity(new Intent(createnote.this, notesactivity.class));
-                        }
-                    });
-
-                     */
-
-
-
 
                 }
             }
@@ -155,7 +117,7 @@ public class signup extends AppCompatActivity {
 
     }
 
-    /*
+
     // Send email verification
     private void sendEmailVerification()
     {
@@ -180,5 +142,5 @@ public class signup extends AppCompatActivity {
         }
     }
 
-     */
+
 }

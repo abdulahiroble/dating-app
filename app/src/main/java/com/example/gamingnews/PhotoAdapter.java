@@ -44,9 +44,6 @@ public class PhotoAdapter extends ArrayAdapter<Cards> {
             case "defaultFemale":
                 Glide.with(getContext()).load(R.drawable.default_woman).into(image);
                 break;
-            case "defaultMale":
-                Glide.with(getContext()).load(R.drawable.default_man).into(image);
-                break;
             default:
                 Glide.with(getContext()).load(card_item.getProfileImageUrl()).into(image);
                 break;

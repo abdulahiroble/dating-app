@@ -5,6 +5,7 @@ public class firebasemodel {
     private String title;
     private String content;
     private String email;
+
     private String firstname;
     private String lastname;
     private String age;
